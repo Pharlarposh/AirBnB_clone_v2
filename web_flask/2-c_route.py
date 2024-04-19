@@ -1,36 +1,27 @@
 #!/usr/bin/python3
 """
-This script starts a Flask web application.
+This is module 2-c_route.py
+
+This module starts a web aplication via Flask
 """
-
-from flask import Flask, escape
-
+from flask import Flask
 app = Flask(__name__)
 
 
-@app.route('/', strict_slashes=False)
+@app.route("/")
+def hello_world():
+        return ("Hello HBNB!")
+
+
+@app.route("/hbnb")
 def hello_hbnb():
-    """
-    Route that displays "Hello HBNB!" when accessed.
-    """
-    return "Hello HBNB!"
+        return ("HBNB")
 
 
-@app.route('/hbnb', strict_slashes=False)
-def hbnb():
-    """
-    Route that displays "HBNB" when accessed.
-    """
-    return "HBNB"
-
-
-@app.route('/c/<text>', strict_slashes=False)
-def c_text(text):
-    """
-    Route that displays "C " followed by the value of the text variable.
-    """
-    return "C {}".format(escape(text))
-
+@app.route("/c/<text>")
+def hello_c(text):
+        text = text.replace("_", " ")
+        return ("C {}".format(text))
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host="0.0.0.0", port="5000")
